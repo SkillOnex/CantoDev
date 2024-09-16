@@ -2,8 +2,9 @@
 const User = require('../models/userModel'); // Substitua pelo caminho correto para o modelo de usuário
 
 exports.protect = async (req, res, next) => {
+  console.log(req.session.userId)
   if (!req.session.userId) {
-    return res.redirect('/login');
+    return console.log("ok")
   }
   next();
 };
