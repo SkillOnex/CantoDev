@@ -4,7 +4,7 @@ const User = require('../models/userModel'); // Substitua pelo caminho correto p
 exports.protect = async (req, res, next) => {
   console.log(req.session.userId)
   if (!req.session.userId) {
-    return console.log("ok")
+    return res.redirect('/');
   }
   next();
 };
