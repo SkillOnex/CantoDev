@@ -1,4 +1,10 @@
 
+   ![GitHub package.json version](https://img.shields.io/github/package-json/v/skillonex/CantoDev)
+   ![GitHub repo size](https://img.shields.io/github/repo-size/skillonex/CantoDev)
+   ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/skillonex/CantoDev)
+
+
+
 # CantoDev
 
 **CantoDev** é uma comunidade voltada para a área de tecnologia, criada para oferecer um espaço simples, otimizado, bonito e responsivo onde os usuários podem postar dúvidas, artigos e muito mais. Utilizando Node.js e Tailwind, este projeto visa promover a colaboração e o aprendizado entre entusiastas da tecnologia.
