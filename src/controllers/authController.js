@@ -36,8 +36,11 @@ exports.login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Senha incorreta" });
     }
-
+    console.log("user.id",user.id);
     req.session.userId = user.id; // Armazena o ID do usuário na sessão
+    console.log("session",req.session.userId)
+
+    
     return res.redirect('/');
   } catch (error) {
     console.error(error);
