@@ -280,9 +280,9 @@
                                     <p class="text-sm font-semibold text-gray-900 dark:text-white">
                                         @<%= comment.User.username %> <span
                                                 class="text-xs text-gray-500 dark:text-slate-500">•
-                                                <%= timeAgo(new Date(comment.createdAt)) %>
+                                                <%= comment.timeAgo %>
                                                     • <span
-                                                        class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">New</span>
+                                                        class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-900 dark:text-gray-300">Novo</span>
                                             </span></span>
                                     </p>
                                 </div>
@@ -294,32 +294,7 @@
                                     <%= comment.content %>
                                 </p>
 
-                                <div id="comment-section" class="p-2 dark:bg-gray-800 hidden">
-                                    <h1 class="text-md font-semibold text-gray-900 mb-2 dark:text-white">
-                                        Comentários 
-                                        <hr class="h-px bg-gray-200 border-0 dark:bg-gray-700">
-                                    </h1>
-                                    <% if (post.Comments && post.Comments.length > 0) { %>
-                                        <% post.Comments.forEach(comment => { %>        
-                                        <div class="p-5 dark:bg-gray-700 rounded-tr-xl rounded-br-xl rounded-bl-xl shadow-lg mb-2">
-                                            <div class="flex items-center mb-2 justify-between">
-                                                <p class="text-sm font-semibold text-gray-900 dark:text-white">
-                                                    @<%= comment.User.username %> 
-                                                    <span class="text-xs text-gray-500 dark:text-slate-500">• <%= timeAgo(new Date(comment.createdAt)) %> • 
-                                                        <span class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">New</span>
-                                                    </span>
-                                                </p>
-                                            </div>
-                                            <p class="text-gray-700 text-sm font-medium dark:text-gray-300 post-content">
-                                                <%= comment.content %>
-                                            </p>
-                                            <!-- Outras partes do código do comentário -->
-                                        </div>
-                                        <% }); %>
-                                    <% } else { %>
-                                        <p class="text-gray-500 dark:text-gray-400">Nenhum comentário ainda.</p>
-                                    <% } %>
-                                </div>
+                                
                                 
 
 
@@ -345,7 +320,7 @@
                                             @CantoDev <span class="text-xs text-gray-500 dark:text-slate-500">
 
                                                 • <span
-                                                    class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">New</span>
+                                                    class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Novo</span>
                                             </span></span>
                                         </p>
                                     </div>
