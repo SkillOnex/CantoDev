@@ -1,19 +1,19 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const User = require('./userModel');
+const definePost = (sequelize, DataTypes, User) => {
+    const Post = sequelize.define('Post', {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        content: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+    });
 
-const Post = sequelize.define('Post', {
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    content: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-    },
-});
+    // Relacionamentos
+    Post.belongsTo(User, { foreignKey: 'userId' });
 
-// Relacionamento entre posts e usuários
-Post.belongsTo(User, { foreignKey: 'userId' });
+    return Post;
+};
 
-module.exports = Post;
+module.exports = definePost;

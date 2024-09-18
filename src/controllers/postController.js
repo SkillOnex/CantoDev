@@ -1,18 +1,13 @@
-// controllers/postController.js
-const createDOMPurify = require('dompurify');
-const { JSDOM } = require('jsdom');
-
-// Crie uma instância de JSDOM
-const window = new JSDOM('').window;
-const DOMPurify = createDOMPurify(window);
-
-const Post = require('../models/postModel');
-const User = require('../models/userModel');
+// controllers/ost
+const { Post, User, Comment } = require('../models/index');
 
 exports.getPosts = async (req, res) => {
     try {
         const posts = await Post.findAll({
-            include: [{ model: User, attributes: ['username'] }],
+            include: [
+                { model: User, attributes: ['username'] },
+                { model: Comment, attributes: ['content', 'createdAt'], include: [{ model: User, attributes: ['username'] }] }
+            ],
             order: [['createdAt', 'DESC']]
         });
 
@@ -35,16 +30,21 @@ exports.getPosts = async (req, res) => {
             else return `${Math.floor(seconds)} segundos atrás`;
         }
 
-        // Formatar a data de cada post
+        // Formatar a data de cada post e comentário
         const formattedPosts = posts.map(post => {
-            
+            const formattedComments = post.Comments.map(comment => ({
+                ...comment.toJSON(),
+                timeAgo: timeAgo(new Date(comment.createdAt))
+            }));
+
             return {
                 ...post.toJSON(),
-                timeAgo: timeAgo(new Date(post.createdAt))
+                timeAgo: timeAgo(new Date(post.createdAt)),
+                Comments: formattedComments
             };
         });
 
-        res.render('index', { posts: formattedPosts , user: req.user });
+        res.render('index', { posts: formattedPosts, user: req.user, timeAgo });
     } catch (error) {
         console.error('Erro ao buscar posts:', error);
         res.status(500).json({ message: 'Erro ao buscar posts', error });
@@ -53,27 +53,26 @@ exports.getPosts = async (req, res) => {
 
 
 
-
-
-
-// Configure DOMPurify para permitir listas (<ul>, <ol>, <li>)
 exports.createPost = async (req, res) => {
-    const { title, content } = req.body;
-
-    // Sanitizar o conteúdo permitindo tags de lista
-    const sanitizedTitle = DOMPurify.sanitize(title, { ALLOWED_TAGS: ['b', 'i', 'strong', 'em', 'ul', 'ol', 'li'] });
-    const sanitizedContent = DOMPurify.sanitize(content, { ALLOWED_TAGS: ['b', 'i', 'strong', 'em', 'ul', 'ol', 'li'] });
-
     try {
-        const post = await Post.create({
-            title: sanitizedTitle,
-            content: sanitizedContent,
-            userId: req.user.id,
+        const { title, content } = req.body;
+
+        // Verifica se o título e o conteúdo são fornecidos
+        if (!title || !content) {
+            return res.status(400).json({ message: 'Título e conteúdo são obrigatórios.' });
+        }
+
+        // Cria um novo post
+        const newPost = await Post.create({
+            title,
+            content,
+            userId: req.user.id // Associa o post ao usuário atual
         });
-        
-        return res.redirect('/');
+
+        // Redireciona para a página principal ou para o post recém-criado
+        res.redirect('/');
     } catch (error) {
         console.error('Erro ao criar post:', error);
-        res.status(500).json({ message: 'Erro ao criar post', error: error.message });
+        res.status(500).json({ message: 'Erro ao criar post', error });
     }
 };

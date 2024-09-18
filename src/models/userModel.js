@@ -1,28 +1,25 @@
+// models/userModel.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const bcrypt = require('bcryptjs');
 
-const User = sequelize.define('User', {
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-});
+const defineUser = (sequelize) => {
+    const User = sequelize.define('User', {
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
+    });
 
-// Hash da senha antes de salvar o usuário
-User.beforeCreate(async (user) => {
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
-});
+    return User;
+};
 
-module.exports = User;
+module.exports = defineUser;
