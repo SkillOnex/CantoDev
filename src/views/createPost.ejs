@@ -20,8 +20,9 @@
   <div class="flex items-center justify-center h-screen ">
     <form class="w-full max-w-2xl bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md" action="/posts" method="POST" onsubmit="return submitForm()">
       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-      <h2 class="text-2xl font-bold mb-6 text-gray-700 dark:text-gray-200">Escrever Novo Post</h2>
-
+      <h2 class="text-2xl font-bold mb-6 text-gray-700 dark:text-white">Espalhe sua sabedoria e inspire novas descobertas</h2>
+      <p class="text-sm font-light text-gray-900 dark:text-gray-400">Não hesite em fazer perguntas ou compartilhar seu conhecimento com a comunidade. No entanto, pedimos que leia nossos <Strong>termos</Strong> e familiarize-se com as regras de postagem antes de participar</p>
+      <br>
       <!-- Campo Título -->
       <div class="mb-5">
         <label for="title" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Título</label>
