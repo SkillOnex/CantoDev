@@ -6,11 +6,13 @@ const { DataTypes } = require('sequelize');
 const defineUser = require('./userModel');
 const definePost = require('./postModel');
 const defineComment = require('./commentModel');
+const defineCoin = require('./coinModel');
 
 // Definir modelos
 const User = defineUser(sequelize, DataTypes);
 const Post = definePost(sequelize, DataTypes, User);
 const Comment = defineComment(sequelize, DataTypes, User, Post);
+const Coin = defineCoin(sequelize, DataTypes);
 
 // Definir associações
 User.hasMany(Post, { foreignKey: 'userId' });
@@ -21,5 +23,11 @@ Comment.belongsTo(Post, { foreignKey: 'postId' });
 
 Comment.belongsTo(User, { foreignKey: 'userId' });
 
+User.hasMany(Coin, { foreignKey: 'userId' });
+Coin.belongsTo(User, { foreignKey: 'userId' });
+
+Post.hasMany(Coin, { foreignKey: 'postId', onDelete: 'CASCADE' });
+Coin.belongsTo(Post, { foreignKey: 'postId' });
+
 // Exportar os modelos e sequelize
-module.exports = { sequelize, User, Post, Comment };
+module.exports = { sequelize, User, Post, Comment, Coin };

@@ -131,17 +131,21 @@
                             <h1 class="text-xl font-semibold text-gray-900 dark:text-white mb-5">
                                 CantoCoins
                             </h1>
-
-                            <div class="flex items-center mb-2">
-                                <img src="/imgs/moeda.png" class="h-auto w-7 me-2">
-                                <p class="text-lg font-semibold text-gray-900 dark:text-gray-300"> 30</p>
-                            </div>
-
-                            <div class="flex items-center ">
-                                <img src="/imgs/moeda-prata.png" class="h-auto w-7 me-2">
-                                <p class="text-lg font-semibold text-gray-900 dark:text-gray-300"> 168</p>
-                            </div>
-
+                            <% coins.forEach(coin => { %>
+                                <div class="flex items-center mb-2">
+                                    <!-- Condição para tipo CantoCoin -->
+                                    <% if (coin.type === 'CantoCoin') { %>
+                                        <img src="/imgs/moeda.png" class="h-auto w-7 me-2">
+                                        <p class="text-lg font-semibold text-gray-900 dark:text-gray-300"><%= coin.amount %></p>
+                                    <% } else { %>
+                                        <!-- Para outros tipos de moeda -->
+                                        <img src="/imgs/moeda-prata.png" class="h-auto w-7 me-2">
+                                        <p class="text-lg font-semibold text-gray-900 dark:text-gray-300"><%= coin.amount %></p>
+                                    <% } %>
+                                </div>
+                            
+                               
+                            <% }) %>
 
                         </div>
                     </div>
