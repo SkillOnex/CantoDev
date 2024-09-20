@@ -136,16 +136,15 @@
                                     <!-- Condição para tipo CantoCoin -->
                                     <% if (coin.type === 'CantoCoin') { %>
                                         <img src="/imgs/moeda.png" class="h-auto w-7 me-2">
-                                        <p class="text-lg font-semibold text-gray-900 dark:text-gray-300"><%= coin.amount %></p>
+                                        <p class="text-lg font-semibold text-gray-900 dark:text-gray-300"><%= coin.amount %></p> <!-- Aumenta o valor em 10 -->
                                     <% } else { %>
                                         <!-- Para outros tipos de moeda -->
                                         <img src="/imgs/moeda-prata.png" class="h-auto w-7 me-2">
-                                        <p class="text-lg font-semibold text-gray-900 dark:text-gray-300"><%= coin.amount %></p>
+                                        <p class="text-lg font-semibold text-gray-900 dark:text-gray-300"><%= coin.amount %></p> <!-- Aumenta o valor em 10 -->
                                     <% } %>
                                 </div>
-                            
-                               
                             <% }) %>
+                            
 
                         </div>
                     </div>
@@ -197,8 +196,8 @@
 
 
                     <div
-                        class="w-full mx-auto mb-5 shadow-lg bg-white dark:bg-gray-900 rounded-xl overflow-hidden mt-3">
-                        <div class="p-5 ">
+                        class="w-full mx-auto shadow-lg bg-white dark:bg-gray-900 rounded-xl overflow-hidden mt-3">
+                        <div class="p-5">
                             <div class="flex items-center mb-4 justify-between ">
                                 <p class="text-sm font-semibold text-gray-900 dark:text-white">
                                     @<%= post.User.username %> <span class="text-xs text-gray-500 dark:text-slate-500">•
@@ -276,10 +275,25 @@
                         
                         
                         <!-- Div Comentarios -->
-                        <div id="comment-section" class="p-2 dark:bg-gray-800  hidden">
-                            <h1 class="text-md font-semibold text-gray-900 mb-2 dark:text-white">Comentários <hr class="h-px  bg-gray-200 border-0 dark:bg-gray-700"></h1>
+                        <div id="comment-section" class="p-2 hidden">
+                            <hr class="h-px mb-2 bg-gray-200 border-0 dark:bg-gray-700">
+
+                            <div class="relative flex items-center mb-2">
+                                <input type="text" name="first-name" id="first-name" placeholder="Adicionar comentario" 
+                                    class="w-full dark:bg-gray-900 rounded-full  py-1.5 text-gray-400 ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6 pl-4 pr-10">
+                                
+                                <div class="absolute right-3">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M5.027 10.9a8.729 8.729 0 0 1 6.422-3.62v-1.2A2.061 2.061 0 0 1 12.61 4.2a1.986 1.986 0 0 1 2.104.23l5.491 4.308a2.11 2.11 0 0 1 .588 2.566 2.109 2.109 0 0 1-.588.734l-5.489 4.308a1.983 1.983 0 0 1-2.104.228 2.065 2.065 0 0 1-1.16-1.876v-.942c-5.33 1.284-6.212 5.251-6.25 5.441a1 1 0 0 1-.923.806h-.06a1.003 1.003 0 0 1-.955-.7A10.221 10.221 0 0 1 5.027 10.9Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            
+                            
                             <% post.Comments.forEach(comment => { %>        
-                            <div class="p-5 dark:bg-gray-700 rounded-tr-xl rounded-br-xl rounded-bl-xl shadow-lg mb-2">
+                            <div class="p-5 dark:bg-gray-800 rounded-tr-xl rounded-br-xl rounded-bl-xl shadow-lg mb-2">
+
                                 <div class="flex items-center mb-2 justify-between ">
                                     <p class="text-sm font-semibold text-gray-900 dark:text-white">
                                         @<%= comment.User.username %> <span

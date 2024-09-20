@@ -10,3 +10,5 @@ const userId = 'TestUser123'; // Pode ser qualquer identificador ou nome
 SendNewPost(title, content, userId, 1)
     .then(() => console.log('Mensagem enviada com sucesso!'))
     .catch((err) => console.error('Erro ao enviar mensagem:', err));
+
+

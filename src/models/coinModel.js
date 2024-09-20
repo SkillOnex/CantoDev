@@ -10,10 +10,7 @@ const defineCoin = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0,
         },
-        description: {
-            type: DataTypes.STRING, // Adicione o campo description se necessário
-            allowNull: true,
-        },
+       
         // Campos de data para tracking
         createdAt: {
             type: DataTypes.DATE,

@@ -1,5 +1,5 @@
 // controllers/ost
-const { Post, User, Comment, Coin } = require("../models/index");
+const { Post, User, Comment, Coin ,Transaction} = require("../models/index");
 const { SendNewPost } = require('../webhooks/discordWebhook');
 
 exports.getPosts = async (req, res) => {
@@ -146,12 +146,29 @@ exports.createPost = async (req, res) => {
             userId: req.user.id, // Associa o post ao usuário atual
         });
 
-        // Adicionar 1 CantoCoin ao usuário por criar o post
-        await Coin.create({
+        // Verifica se o usuário já possui moedas
+        let coin = await Coin.findOne({ where: { userId: req.user.id, type: 'CantoCoin' } });
+
+        if (coin) {
+            // Se já possui, atualize o saldo
+            coin.amount += 1;
+            await coin.save();
+        } else {
+            // Caso contrário, crie a moeda
+            coin = await Coin.create({
+                userId: req.user.id,
+                amount: 1,
+                type: 'CantoCoin',
+                postId: newPost.id
+            });
+        }
+
+        // Crie uma transação para registrar o ganho
+        await Transaction.create({
             userId: req.user.id,
-            amount: 1, // Quantidade de moedas
             type: 'CantoCoin',
-            description: 'Moeda concedida por criar um post',
+            amount: 1,
+            description: 'Ganhou 1 CantoCoin por criar um post',
             postId: newPost.id
         });
 
