@@ -25,7 +25,7 @@
 ## Imagem do Projeto
 - Não vou incluir mais imagens para não poluir o Readme
 <div align="center">
-<img src="src/public/prints/updatePage.png" alt="Logo do Projeto" width="auto" height="auto">
+<img src="src/public/prints/Index_novo.png" alt="Logo do Projeto" width="auto" height="auto">
 <img src="src/public/prints/Criar_Postagem.png" alt="Logo do Projeto" width="auto" height="auto">
 
 </div>
